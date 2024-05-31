@@ -11,15 +11,39 @@
     ]
   },
   "dependencies": {
+    "@fontsource-variable/dm-sans": "^5.0.6",
+    "@redwoodjs/auth-dbauth-web": "7.6.2",
     "@redwoodjs/forms": "7.6.2",
     "@redwoodjs/router": "7.6.2",
     "@redwoodjs/web": "7.6.2",
+    "bootstrap": "^5.3.3",
+    "classnames": "^2.5.1",
+    "date-fns": "^3.6.0",
+    "i18n": "^0.15.1",
+    "i18next": "^23.11.5",
+    "i18next-browser-languagedetector": "^8.0.0",
+    "nouislider-react": "^3.4.2",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-copy-to-clipboard": "^5.1.0",
+    "react-datepicker": "^6.9.0",
+    "react-dom": "18.2.0",
+    "react-i18next": "^14.1.2",
+    "react-step-builder": "^3.0.6",
+    "react-use": "^17.5.0",
+    "reactstrap": "^9.2.2",
+    "sass": "^1.77.2",
+    "simplebar-react": "^3.2.5",
+    "styled-components": "^6.1.11",
+    "usehooks-ts": "^3.1.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@redwoodjs/vite": "7.6.2",
+    "@types/bootstrap": "^5",
+    "@types/i18n": "^0",
     "@types/react": "^18.2.55",
+    "@types/react-copy-to-clipboard": "^5",
+    "@types/react-datepicker": "^6",
     "@types/react-dom": "^18.2.19"
   }
 }
