@@ -1,16 +1,12 @@
-import React from "react";
 import classNames from "classnames";
 import SimpleBar from "simplebar-react";
 
 import { useTheme, useThemeUpdate } from 'src/providers/theme';
+import CryptoMenu from "./menu";
 import Toggle from "./toggle";
-import { Link } from "@redwoodjs/router";
-import { Button, UncontrolledDropdown, DropdownToggle } from "reactstrap";
+import { UncontrolledDropdown, DropdownToggle } from "reactstrap";
 import Icon from "src/components/Icon/Icon";
 import LangDropdown from "src/components/LangDropdown/LangDropdown";
-import Logo from "./logo";
-import Menu from "./menu";
-import CryptoMenu from "./menu";
 
 const Sidebar = ({ fixed, className, ...props }) => {
   const theme = useTheme();
@@ -29,7 +25,7 @@ const Sidebar = ({ fixed, className, ...props }) => {
   return (
     <>
     <div className={classes}>
-      <div className="nk-sidebar-element nk-sidebar-head">
+      <div className="nk-sidebar-element nk-sidebar-head border-bottom-0">
         <div className="nk-sidebar-brand">
           -APP.LOGO-
         </div>
@@ -42,7 +38,7 @@ const Sidebar = ({ fixed, className, ...props }) => {
           <div className="nk-sidebar-menu">
             <CryptoMenu />
           </div>
-          {/* <div className="nk-sidebar-footer">
+          <div className="nk-sidebar-footer">
             <ul className="nk-menu nk-menu-footer">
               <li className="nk-menu-item">
                 <a href="#link" className="nk-menu-link" onClick={(ev) => ev.preventDefault()}>
@@ -69,7 +65,7 @@ const Sidebar = ({ fixed, className, ...props }) => {
                 </UncontrolledDropdown>
               </li>
             </ul>
-          </div> */}
+          </div>
         </div>
       </SimpleBar>
     </div>

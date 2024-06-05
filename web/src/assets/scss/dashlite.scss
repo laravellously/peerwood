@@ -1,5 +1,5 @@
 // Included Global Variables and Functions
-@import "dashlite_variables";
+@import "_dashlite_variables";
 
 // Included Fonts
 /** 01. FONTS */
@@ -23,11 +23,28 @@
 
 //////  INDIVIDUL CONCEPTS
 @import "crypto/style";
-// @import "invest/style";
+@import "invest/style";
+
+//////  APPLICATONS - Common Uses
+@import "apps/asterisk";
+@import "apps/reply-comment";
+@import "apps/attach";
+
+//////  Apps
+@import "apps/messages";  		// - Support Messages
+@import "apps/inbox";  			// - Inbox/ Mail App
+@import "apps/file-manager";  	// - File Manager
+@import "apps/chats";  			// - Chats
+
+///////  PREVIEW PURPOSE
+// @import "core/preview"; 		// Can be remove on real projoect
+
+///////  UI/MODE OVERRIDE
+@import "core/mode-override";
+@import "skins/theme-purple";
 
 ///////  DARK MODE SKIN
 // @import "core/dark-skin";
-// @import "skins/theme-green"
 
 /*! END @iO */
 ////////////////////////// END STYLESHEET ////////////////////////////

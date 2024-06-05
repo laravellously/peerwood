@@ -16,8 +16,8 @@ export function useThemeUpdate(){
 const ThemeProvider = ({...props}) => {
 
   const defaultTheme = {
-    main: "clean", //other value can be passed "clean,shady,softy"
-    sidebar: "dark", //other value can be passed "light,white,theme"
+    main: "default", //other value can be passed "clean,shady,softy"
+    sidebar: "light", //other value can be passed "light,white,theme"
     sidebarCompact: false,
     sidebarVisibility: false,
     sidebarMobile: false,
@@ -54,7 +54,7 @@ const ThemeProvider = ({...props}) => {
     }
 
     const bodyClass = classNames({
-      "nk-body bg-lighter npc-default has-sidebar no-touch nk-nio-theme": true,
+      "nk-body bg-white npc-default has-sidebar no-touch nk-nio-theme": true,
     });
 
   useEffect(() => {

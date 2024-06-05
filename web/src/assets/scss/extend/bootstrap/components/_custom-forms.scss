@@ -1,7 +1,4 @@
 @use "sass:math";
-$custom-checkbox-icon: $ni-check-thick !default;
-$custom-radio-icon: $ni-bullet-fill !default;
-
 
 //   
 .custom-control {
@@ -18,51 +15,47 @@ $custom-radio-icon: $ni-bullet-fill !default;
 }
   
 .custom-control-input {
-position: absolute;
-left: 0;
-z-index: -1; // Put the input behind the label so it doesn't overlay text
-width: $custom-control-indicator-size;
-height: math.div($font-size-base * $line-height-base + $custom-control-indicator-size , 2);
-opacity: 0;
+    position: absolute;
+    left: 0;
+    z-index: -1; // Put the input behind the label so it doesn't overlay text
+    width: $custom-control-indicator-size;
+    height: math.div($font-size-base * $line-height-base + $custom-control-indicator-size , 2);
+    opacity: 0;
 
-&:checked ~ .custom-control-label::before {
-    color: $custom-control-indicator-checked-color;
-    border-color: $custom-control-indicator-checked-border-color;
-    background-color: $custom-control-indicator-checked-bg;
-    box-shadow: $custom-control-indicator-checked-box-shadow;
-}
-
-&:focus ~ .custom-control-label::before {
-    // the mixin is not used here to make sure there is feedback
-    @if $enable-shadows {
-    box-shadow: $input-box-shadow, $input-focus-box-shadow;
-    } @else {
-    box-shadow: $custom-control-indicator-focus-box-shadow;
+    &:checked ~ .custom-control-label::before {
+        color: $custom-control-indicator-checked-color;
+        border-color: $custom-control-indicator-checked-border-color;
+        background-color: $custom-control-indicator-checked-bg;
+        box-shadow: $custom-control-indicator-checked-box-shadow;
     }
-}
 
-&:focus:not(:checked) ~ .custom-control-label::before {
-    border-color: $custom-control-indicator-focus-border-color;
-}
-
-&:not(:disabled):active ~ .custom-control-label::before {
-    color: $custom-control-indicator-active-color;
-    background-color: $custom-control-indicator-active-bg;
-    border-color: $custom-control-indicator-active-border-color;
-    box-shadow: $custom-control-indicator-active-box-shadow;
-}
-
-// Use [disabled] and :disabled to work around https://github.com/twbs/bootstrap/issues/28247
-&[disabled],
-  &:disabled {
-    ~ .custom-control-label {
-      color: $custom-control-label-disabled-color;
-
-      &::before {
-        background-color: $custom-control-indicator-disabled-bg;
-      }
+    &:focus ~ .custom-control-label::before {
+        // the mixin is not used here to make sure there is feedback
+        @if $enable-shadows {
+        box-shadow: $input-box-shadow, $input-focus-box-shadow;
+        } @else {
+        box-shadow: $custom-control-indicator-focus-box-shadow;
+        }
     }
-  }
+
+    &:focus:not(:checked) ~ .custom-control-label::before {
+        border-color: $custom-control-indicator-focus-border-color;
+    }
+
+    &:not(:disabled):active ~ .custom-control-label::before {
+        color: $custom-control-indicator-active-color;
+        background-color: $custom-control-indicator-active-bg;
+        border-color: $custom-control-indicator-active-border-color;
+        box-shadow: $custom-control-indicator-active-box-shadow;
+    }
+
+    // Use [disabled] and :disabled to work around https://github.com/twbs/bootstrap/issues/28247
+    &[disabled],
+    &:disabled {
+        ~ .custom-control-label {
+            color: $custom-control-label-disabled-color;
+        }
+    }
 }
 
 // Custom control indicators
@@ -70,41 +63,41 @@ opacity: 0;
 // Build the custom controls out of pseudo-elements.
 
 .custom-control-label {
-position: relative;
-margin-bottom: 0;
-color: $custom-control-label-color;
-vertical-align: top;
-cursor: $custom-control-cursor;
-&:before,&:after{
-    z-index: 1;
-}
-// Background-color and (when enabled) gradient
-&::before {
-    position: absolute;
-    top: math.div($font-size-base * $line-height-base - $custom-control-indicator-size , 2);
-    left: -($custom-control-gutter + $custom-control-indicator-size);
-    display: block;
-    width: $custom-control-indicator-size;
-    height: $custom-control-indicator-size;
-    pointer-events: none;
-    content: "";
-    background-color: $custom-control-indicator-bg;
-    border: $custom-control-indicator-border-color solid $custom-control-indicator-border-width;
-    box-shadow: $custom-control-indicator-box-shadow;
-    border-radius: $custom-checkbox-indicator-border-radius;
-}
+    position: relative;
+    margin-bottom: 0;
+    color: $custom-control-label-color;
+    vertical-align: top;
+    cursor: $custom-control-cursor;
+    &:before,&:after{
+        z-index: 1;
+    }
+    // Background-color and (when enabled) gradient
+    &::before {
+        position: absolute;
+        top: math.div($font-size-base * $line-height-base - $custom-control-indicator-size , 2);
+        left: -($custom-control-gutter + $custom-control-indicator-size);
+        display: block;
+        width: $custom-control-indicator-size;
+        height: $custom-control-indicator-size;
+        pointer-events: none;
+        content: "";
+        background-color: $custom-control-indicator-bg;
+        border: $custom-control-indicator-border-color solid $custom-control-indicator-border-width;
+        box-shadow: $custom-control-indicator-box-shadow;
+        border-radius: $custom-checkbox-indicator-border-radius;
+    }
 
-// Foreground (icon)
-&::after {
-    position: absolute;
-    top: math.div($font-size-base * $line-height-base - $custom-control-indicator-size , 2);
-    left: -($custom-control-gutter + $custom-control-indicator-size);
-    display: block;
-    width: $custom-control-indicator-size;
-    height: $custom-control-indicator-size;
-    content: "";
-    background: no-repeat 50% / #{$custom-control-indicator-bg-size};
-}
+    // Foreground (icon)
+    &::after {
+        position: absolute;
+        top: math.div($font-size-base * $line-height-base - $custom-control-indicator-size , 2);
+        left: -($custom-control-gutter + $custom-control-indicator-size);
+        display: block;
+        width: $custom-control-indicator-size;
+        height: $custom-control-indicator-size;
+        content: "";
+        background: no-repeat 50% / #{$custom-control-indicator-bg-size};
+    }
 }
 
 .custom{
@@ -158,16 +151,15 @@ cursor: $custom-control-cursor;
                 justify-content: center;
                 background-image: none !important;
                 font-family: $nk-dashlite-font;
-                color: $form-check-input-checked-color;
+                color: $custom-control-indicator-checked-color;
                 opacity: 0;
                 .custom-checkbox &{
-                    content: $custom-checkbox-icon;
+                    content: $ni-check-thick;
                 }
                 .custom-radio &{
-                    content: $custom-radio-icon;
+                    content: $ni-bullet-fill;
                 }
             }
-            
         }
         .custom-control-input{
             &:checked ~ .custom-control-label::after{
@@ -267,6 +259,8 @@ cursor: $custom-control-cursor;
         background: $field-bg;
     }
 }
+
+// custom-control-group
 .custom-control{
     &-group{
         display: inline-flex;
@@ -322,48 +316,7 @@ cursor: $custom-control-cursor;
     }
     }
 }
-//image control
-.image-control{
-    &.custom-control{
-        padding-left: 0;
-    }
-    .custom-control-input:checked ~ .custom-control-label{
-      &:before{
-        border-color: $white;
-      }
-      img{
-        opacity: .8;
-      }
-    }
-    .custom-control-label {
-      padding-top: 0;
-      border-radius: $border-radius;
-      overflow: hidden;
-      background-color: $dark;
-      img{
-        transition:opacity .3s ease;
-      }
-      &:before,&:after{
-        z-index: 9;
-      }
-      &::before {
-        border-width: 1px;
-        top: 1rem;
-        left: 1rem;
-      }
-      &::after {
-        top: 1rem;
-        left: 1rem;
-      }
-    }
-    &:hover{
-      .custom-control-label{
-        img{
-          opacity: .8;
-        }
-      }
-    }
-  }
+
 // custom-control-pro
 .custom-control-pro{
     padding-left: 0;
@@ -514,32 +467,22 @@ cursor: $custom-control-cursor;
     border-color: $accent-color;
   }
 }
+
 .custom-control-full{
     width: 100%;
     height: 100%;
-  .custom-control-label {
-    width: 100%;
-    height: 100%;
-  }
+    .custom-control-label {
+        width: 100%;
+        height: 100%;
+    }
 }
-//no-control
+
+//   no-control
 .no-control{
     padding-left: 0;
     .custom-control-label {
         &::before,&::after {
         display: none;
-        }
-    }
-}
-// custom-radio
-.custom-radio {
-    .custom-control-label::before {
-      // stylelint-disable-next-line property-blacklist
-      border-radius: $custom-radio-indicator-border-radius;
-    }
-    .custom-control-input:disabled {
-        &:checked ~ .custom-control-label::before {
-            background-color: $custom-control-indicator-checked-disabled-bg;
         }
     }
 }
@@ -554,6 +497,61 @@ cursor: $custom-control-cursor;
         }
     }
 }
+
+// custom-radio
+.custom-radio {
+    .custom-control-label::before {
+      // stylelint-disable-next-line property-blacklist
+      border-radius: $custom-radio-indicator-border-radius;
+    }
+    .custom-control-input:disabled {
+        &:checked ~ .custom-control-label::before {
+            background-color: $custom-control-indicator-checked-disabled-bg;
+        }
+    }
+}
+//image control
+.image-control{
+    &.custom-control{
+        padding-left: 0;
+    }
+    .custom-control-input:checked ~ .custom-control-label{
+      &:before{
+        border-color: $white;
+      }
+      img{
+        opacity: .8;
+      }
+    }
+    .custom-control-label {
+      padding-top: 0;
+      border-radius: $border-radius;
+      overflow: hidden;
+      background-color: $dark;
+      img{
+        transition:opacity .3s ease;
+      }
+      &:before,&:after{
+        z-index: 9;
+      }
+      &::before {
+        border-width: 1px;
+        top: 1rem;
+        left: 1rem;
+      }
+      &::after {
+        top: 1rem;
+        left: 1rem;
+      }
+    }
+    &:hover{
+      .custom-control-label{
+        img{
+          opacity: .8;
+        }
+      }
+    }
+  }
 // custom-switch
 .custom-switch {
     padding-left: $switch-width + $checkbox-radio-switch-text-gap;
@@ -566,7 +564,7 @@ cursor: $custom-control-cursor;
       }
       &::after {
         opacity: 1;
-        top: math.div($checkbox-radio-switch-size - $switch-indicator-size, 2);
+        top: math.div($checkbox-radio-switch-size - $switch-indicator-size,2);
         left: -3.5rem;
         width: $switch-indicator-size;
         height: $switch-indicator-size;
@@ -581,16 +579,16 @@ cursor: $custom-control-cursor;
         }
     }
     .custom-control-input:checked ~ .custom-control-label {
-        &::after {
-            background-color: $custom-control-indicator-bg;
-            transform: translateX($custom-switch-width - $custom-control-indicator-size);
-        }
+      &::after {
+        background-color: $custom-control-indicator-bg;
+        transform: translateX($switch-indicator-active-position);
+      }
     }
     &.custom-control-sm{
         padding-left: $switch-width-sm + $checkbox-radio-switch-text-gap-sm;
         .custom-control-label {
             &::before {
-              left: -($switch-width-sm + $checkbox-radio-switch-text-gap-sm);
+                left: -($switch-width-sm + $checkbox-radio-switch-text-gap-sm);
               width: $switch-width-sm;
               border-radius: $switch-indicator-border-radius-sm;
             }
@@ -617,7 +615,7 @@ cursor: $custom-control-cursor;
               border-radius: $switch-indicator-border-radius-lg;
             }
             &::after {
-              top: math.div($checkbox-radio-switch-size-lg - $switch-indicator-size-lg, 2);
+              top: math.div($checkbox-radio-switch-size-lg - $switch-indicator-size-lg,2);
               left: add(-($switch-width-lg + $checkbox-radio-switch-text-gap-lg), $switch-border-calc-1-5x);
               width: $switch-indicator-size-lg;
               height: $switch-indicator-size-lg;
@@ -680,11 +678,7 @@ cursor: $custom-control-cursor;
         }
     }
 }
-.custom-control-label::before,
-.custom-file-label,
-.form-select {
-    transition: $custom-forms-transition;
-}
+  
 
 label{
     cursor: pointer;
@@ -695,7 +689,8 @@ label{
 
 
 //validation
-.is-alter .js-select2~,.is-alter .form-select ~,.is-alter .form-control ~,.is-alter .input-group ~, .custom-control{
+
+.is-alter .form-control ~, .is-alter .input-group ~, .custom-control{
     .invalid{
         position: absolute;
         left: 0;
@@ -721,7 +716,7 @@ label{
         }
     }
 }
-.is-alter .js-select2~,.is-alter .form-select ~,.is-alter .form-control ~,.is-alter .input-group ~{
+.is-alter .form-control ~, .is-alter .input-group ~{
     .invalid{
         left: auto;
         right: 0;
@@ -736,7 +731,6 @@ label{
 }
 
 
-// 
 .form-file {
     position: relative;
     display: inline-block;
@@ -804,17 +798,13 @@ label{
       line-height: $custom-file-line-height;
       color: $custom-file-button-color;
       content: "Browse";
-      background-color: $custom-file-button-bg; 
+      @include gradient-bg($custom-file-button-bg);
       border-left: inherit;
       border-radius: 0 $custom-file-border-radius $custom-file-border-radius 0;
     }
   }
 
   
-.form-control-slider{
-  margin-top: 0.25rem;
-  margin-bottom: 0.25rem;
-}
 //   Input group
 
 .input-group {
@@ -920,8 +910,8 @@ label{
 .input-group > .input-group-append:not(:last-child) > .input-group-text,
 .input-group > .input-group-append:last-child > .btn:not(:last-child):not(.dropdown-toggle),
 .input-group > .input-group-append:last-child > .input-group-text:not(:last-child) {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0
 }
 
 .input-group > .input-group-append > .btn,
@@ -930,8 +920,8 @@ label{
 .input-group > .input-group-prepend:not(:first-child) > .input-group-text,
 .input-group > .input-group-prepend:first-child > .btn:not(:first-child),
 .input-group > .input-group-prepend:first-child > .input-group-text:not(:first-child) {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0
 }
 // for datatable
 .custom-select {

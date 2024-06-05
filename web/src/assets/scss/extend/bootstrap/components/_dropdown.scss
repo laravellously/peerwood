@@ -1,20 +1,4 @@
 @use "sass:math";
-
-$dropdown-indicator-icon: $ni-chevron-down !default;
-$dropup-indicator-icon: $ni-chevron-up !default;
-$dropdown-indicator-caret-icon: $ni-caret-down-fill !default;
-$dropup-indicator-caret-icon: $ni-caret-down-fill !default;
-$dropdown-indicator-caret-up-icon: $ni-caret-up-fill !default;
-$dropup-indicator-caret-up-icon: $ni-caret-up-fill !default;
-$dropdown-indicator-up-icon: $ni-arrow-long-up !default;
-$dropup-indicator-up-icon: $ni-arrow-long-up !default;
-$dropdown-indicator-down-icon: $ni-arrow-long-down !default;
-$dropup-indicator-down-icon: $ni-arrow-long-down !default;
-$dropdown-indicator-dubble-icon: $ni-chevrons-down !default;
-$dropup-indicator-dubble-icon: $ni-chevrons-up !default;
-$dropdown-indicator-unfold-icon: $ni-unfold-more !default;
-$dropup-indicator-unfold-icon: $ni-unfold-more !default;
-
 .dropup, .dropright, .dropdown, .dropleft{
     display: inline-flex;
 }
@@ -88,14 +72,14 @@ $dropup-indicator-unfold-icon: $ni-unfold-more !default;
         border: none !important;
         font-family: $nk-dashlite-font;
         vertical-align: middle;
-        content: $dropdown-indicator-icon;
+        content: $ni-chevron-down;
         margin-left: 0.25rem;
         line-height: 1;
         display: inline-flex;
         align-items: center;
         font-size: 14px;
         .dropup &{
-            content: $dropup-indicator-icon;
+            content: $ni-chevron-up;
         }
     }
 }
@@ -103,49 +87,49 @@ $dropup-indicator-unfold-icon: $ni-unfold-more !default;
     &-indicator{
         &-caret{
             &:after{
-                content: $dropdown-indicator-caret-icon;
+                content: $ni-caret-down-fill;
                 .dropup &{
-                    content: $dropup-indicator-caret-icon;
+                    content: $ni-caret-down-fill;
                 }
             }
         }
         &-caret-up{
             &:after{
-                content: $dropdown-indicator-caret-up-icon;
+                content: $ni-caret-up-fill;
                 .dropup &{
-                    content: $dropup-indicator-caret-up-icon;
+                    content: $ni-caret-up-fill;
                 }
             }
         }
         &-up{
             &:after{
-                content: $dropdown-indicator-up-icon;
+                content: $ni-arrow-long-up;
                 .dropup &{
-                    content: $dropup-indicator-up-icon;
+                    content: $ni-arrow-long-up;
                 }
             }
         }
         &-down{
             &:after{
-                content: $dropdown-indicator-down-icon;
+                content: $ni-arrow-long-down;
                 .dropup &{
-                    content: $dropup-indicator-down-icon;
+                    content: $ni-arrow-long-down;
                 }
             }
         }
         &-dubble{
             &:after{
-                content: $dropdown-indicator-dubble-icon;
+                content: $ni-chevrons-down;
                 .dropup &{
-                    content: $dropup-indicator-dubble-icon;
+                    content: $ni-chevrons-up;
                 }
             }
         }
         &-unfold{
             &:after{
-                content: $dropdown-indicator-unfold-icon;
+                content: $ni-unfold-more;
                 .dropup &{
-                    content: $dropup-indicator-unfold-icon;
+                    content: $ni-unfold-more;
                 }
             }
         }
@@ -178,28 +162,28 @@ $dropup-indicator-unfold-icon: $ni-unfold-more !default;
         min-width: $dropdown-width-md;
         max-width: $dropdown-width-md;
         &.dropdown-menu-center{
-            margin-left: math.div(-$dropdown-width-md, 2);
+            margin-left: - math.div($dropdown-width-md,2);
         }
     }
     &-sm{
         min-width: $dropdown-width-sm;
         max-width: $dropdown-width-sm;
         &.dropdown-menu-center{
-            margin-left: math.div(-$dropdown-width-sm,2);
+            margin-left: - math.div($dropdown-width-sm,2);
         }
     }
     &-lg{
         min-width: $dropdown-width-lg;
         max-width: $dropdown-width-lg;
         &.dropdown-menu-center{
-            margin-left:  math.div(-$dropdown-width-xl, 2);
+            margin-left: - math.div($dropdown-width-lg,2);
         }
     }
     &-xl{
         min-width: $dropdown-width-xl;
         max-width: $dropdown-width-xl;
         &.dropdown-menu-center{
-            margin-left:  math.div(-$dropdown-width-xl, 2);
+            margin-left: - math.div($dropdown-width-xl,2);
         }
     }
     &-auto{
@@ -211,13 +195,19 @@ $dropup-indicator-unfold-icon: $ni-unfold-more !default;
         overflow: auto;
     }
 }
+@media (max-width:420px){
+    .dropdown-menu-sm{
+        margin-left: 14px !important;
+    }
+}
+
 // Header Dropdown
 .nk-quick-nav{
     .dropdown-menu{
         margin-top: 9px !important;
         margin-right: -6px !important;
     }
-}
+  }
   
   @media (max-width:420px){
     .dropdown-menu-xl,.dropdown-menu-lg,.dropdown-menu-md{
@@ -236,7 +226,6 @@ $dropup-indicator-unfold-icon: $ni-unfold-more !default;
     }
   }
   
-
 // Style s1
 .dropdown-menu-s1 {
     border-top:3px solid $primary;

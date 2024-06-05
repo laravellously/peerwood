@@ -29,7 +29,7 @@ const Notifications = () => {
   };
   return (
     <Dropdown isOpen={open} className="user-dropdown" toggle={toggle}>
-      <DropdownToggle tag="a" className="dropdown-toggle nk-quick-nav-icon">
+      <DropdownToggle tag="a" className="dropdown-toggle nk-quick-nav-icon border border-light rounded-circle bg-light" style={{ fontSize: '22px' }}>
         <div className="icon-status icon-status-info">
           <Icon name="bell" />
         </div>

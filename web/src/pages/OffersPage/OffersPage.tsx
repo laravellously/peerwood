@@ -20,10 +20,10 @@ const OffersPage = () => {
         <BlockHead>
           <BlockBetween size="md" className="g-4">
             <BlockHeadContent>
-              <BlockTitle tag="h2" className="fw-normal">Your Orders</BlockTitle>
-              <BlockDes>
+              <BlockTitle tag="h2" className="fw-normal">Trade Offers</BlockTitle>
+              {/* <BlockDes>
                 <p>See full list of your orders of your account</p>
-              </BlockDes>
+              </BlockDes> */}
             </BlockHeadContent>
             <BlockHeadContent>
               <ul className="nk-block-tools gx-3">

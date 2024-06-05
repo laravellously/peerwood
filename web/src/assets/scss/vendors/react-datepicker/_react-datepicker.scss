@@ -129,15 +129,6 @@ $input-daterange-add-on-bg: $bg-light;
     width: 45%;
 }
 
-.date-picker-range {
-    .start-m input{
-      border-radius: 3px 0px 0px 3px !important;
-    }
-    .end-m input{
-      border-radius: 0px 3px 3px 0px !important;
-    }
-}
-
 .react-datepicker-wrapper {
   display: inline-block;
   padding: 0;

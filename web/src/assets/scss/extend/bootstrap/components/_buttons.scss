@@ -7,11 +7,11 @@
     align-items: center;
     &-xl {
         @include button-size($btn-padding-y-lg, $btn-padding-x-lg, $btn-font-size-lg, $btn-border-radius-lg);
-        line-height:  $btn-line-height-lg;
+        line-height: $btn-line-height-lg;
     }
     &-xs{
         @include button-size($btn-padding-y-xs, $btn-padding-x-xs, $btn-font-size-xs, $btn-border-radius-xs);
-        line-height:  $btn-line-height-xs;
+        line-height: $btn-line-height-xs;
     }
     // With Icon
     .icon{
@@ -86,14 +86,14 @@
         }
         .dot{
             top: .35rem;
-            right: .35rem;
             position: absolute;
+            right: .35rem;
             transform: translate(50%, -50%);
         }
         .badge{
             top: .25rem;
-            right: .25rem;
             position: absolute;
+            right: .25rem;
             transform: translate(50%, -50%);
             &-circle{
                 border-radius: 50%;
@@ -287,10 +287,6 @@ $dim-btns:
 
 // OVERRIDE DEFAUTL COLOR
 .btn {
-    &-light{
-        background-color: $light-200;
-        border-color: $light-200;
-    }
     &-trans.btn {
         background-color: transparent;
         border-color: transparent;
@@ -319,53 +315,3 @@ $dim-btns:
         background: $light-400;
     }
 }
-
-.btn{
-    &-p{
-        &-0{
-            padding: 0;
-        }
-        &x-0{
-            padding-left: 0;
-            padding-right: 0;
-        }
-        &y-0{
-            padding-top: 0;
-            padding-bottom: 0;
-        }
-    }
-    &-nofocus{
-        box-shadow: none !important;
-    }
-}
-
-
-
-
-// @mixin button-variant(
-//   $background,
-//   $border,
-//   $color: color-contrast($background),
-//   $hover-background: if($color == $color-contrast-light, shade-color($background, $btn-hover-bg-shade-amount), tint-color($background, $btn-hover-bg-tint-amount)),
-//   $hover-border: if($color == $color-contrast-light, shade-color($border, $btn-hover-border-shade-amount), tint-color($border, $btn-hover-border-tint-amount)),
-//   $hover-color: color-contrast($hover-background),
-// //   $active-background: if($color == $color-contrast-light, shade-color($background, $btn-active-bg-shade-amount), tint-color($background, $btn-active-bg-tint-amount)),
-// //   $active-border: if($color == $color-contrast-light, shade-color($border, $btn-active-border-shade-amount), tint-color($border, $btn-active-border-tint-amount)),
-// //   $active-color: color-contrast($active-background),
-// //   $disabled-background: $background,
-// //   $disabled-border: $border,
-// //   $disabled-color: color-contrast($disabled-background)
-// ) {
-//   .btn-check:focus + &,
-//   &:focus {
-//     color: $hover-color;
-//     background: $hover-background !important;
-//     border-color: $hover-border !important;
-//     @if $enable-shadows {
-//         box-shadow: ($btn-box-shadow, 0 0 0 $btn-focus-width rgba(mix($color, $border, 15%), .5));
-//     } @else {
-//       // Avoid using mixin so we can pass custom focus shadow properly
-//       box-shadow: 0 0 0 $btn-focus-width rgba(mix($color, $border, 15%), .5);
-//     }
-//   }
-// }

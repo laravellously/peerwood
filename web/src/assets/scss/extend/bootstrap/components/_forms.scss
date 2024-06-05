@@ -1,6 +1,5 @@
 @use "sass:math";
 
-$form-control-select-icon: $ni-chevron-down !default;
 .form{
     &-icon{
         position: absolute;
@@ -80,14 +79,14 @@ $form-control-select-icon: $ni-chevron-down !default;
             z-index: 1;
             transition: all .3s ease;
             margin-bottom: 0;
-            font-size: $input-font-size;
+            @include font-size($input-font-size);
             .form-control-lg ~ &{
                 top: $input-padding-y-lg;
                 padding: 0 math.div($input-padding-x,2.65);
-                font-size: $input-font-size-lg;
+                @include font-size($input-font-size-lg);
             }
             .form-control-sm ~ &{
-                font-size: $input-font-size-sm;
+                @include font-size($input-font-size-sm);
                 top: $input-padding-y-sm;
                 left: math.div($input-padding-x,2.5);
             }
@@ -100,7 +99,7 @@ $form-control-select-icon: $ni-chevron-down !default;
                 font-size: 11px;
             }
             .form-control-xl ~ &{
-                font-size: $input-font-size-xl;
+                @include font-size($input-font-size-xl);
                 line-height: $input-line-height-xl;
                 top: $input-padding-y-xl;
                 padding: 0 math.div($input-padding-x-xl,2.5);
@@ -136,9 +135,9 @@ $form-control-select-icon: $ni-chevron-down !default;
         &-xl {
             height: $input-height-xl !important;
             padding: $input-padding-y-xl $input-padding-x-xl;
-            font-size: $input-font-size-xl;
+            @include font-size($input-font-size-xl);
             line-height: $input-line-height-xl;
-            border-radius:$input-border-radius-xl; 
+            @include border-radius($input-border-radius-xl);
         }
         &-outlined{
             cursor: pointer;
@@ -204,7 +203,6 @@ $form-control-select-icon: $ni-chevron-down !default;
             margin-bottom: 0;
         }
     }
-    
     &-focus{
         &-none{
             &:focus{
@@ -236,7 +234,6 @@ $form-control-select-icon: $ni-chevron-down !default;
         }
     }
 }
-//
 .form-control-select{
     position: relative;
     .form-control{
@@ -264,7 +261,7 @@ $form-control-select-icon: $ni-chevron-down !default;
     }
     &:after{
         font-family: $nk-dashlite-font;
-        content:$form-control-select-icon;
+        content:$ni-chevron-down;
         pointer-events: none;
         position: absolute;
         display: inline-flex;
@@ -305,6 +302,7 @@ textarea{
 }
 
 // validation
+
 .custom-file-input,.form-control,.input-group,.js-select2,.form-select{
     ~ .error, ~ .invalid{
         color: $field-error-color;
@@ -312,7 +310,6 @@ textarea{
         font-style: italic;
     }
 }
-
 
 .custom-btn{
     &-check{
@@ -363,7 +360,6 @@ textarea{
         }
     }
 }
-
 .form-inline {
     display: flex;
     flex-flow: row wrap;

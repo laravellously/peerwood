@@ -1,10 +1,18 @@
 import type { APIGatewayProxyEvent, Context } from 'aws-lambda'
 
-import { DbAuthHandler } from '@redwoodjs/auth-dbauth-api'
+import { customAlphabet } from 'nanoid'
+
+import { DbAuthHandler, PasswordValidationError } from '@redwoodjs/auth-dbauth-api'
 import type { DbAuthHandlerOptions, UserType } from '@redwoodjs/auth-dbauth-api'
 
 import { cookieName } from 'src/lib/auth'
 import { db } from 'src/lib/db'
+import { add } from 'date-fns/add'
+import { mailer } from 'src/lib/mailer'
+import VerifyEmail from 'src/mail/Auth/VerifyEmail'
+import { logger } from 'src/lib/logger'
+
+const nanoid = customAlphabet('0123456789', 6)
 
 export const handler = async (
   event: APIGatewayProxyEvent,
@@ -43,9 +51,9 @@ export const handler = async (
       // for security reasons you may want to be vague here rather than expose
       // the fact that the email address wasn't found (prevents fishing for
       // valid email addresses)
-      usernameNotFound: 'Username not found',
+      usernameNotFound: 'Wrong credentials',
       // if the user somehow gets around client validation
-      usernameRequired: 'Username is required',
+      usernameRequired: 'Email is required',
     },
   }
 
@@ -61,17 +69,26 @@ export const handler = async (
     // didn't validate their email yet), throw an error and it will be returned
     // by the `logIn()` function from `useAuth()` in the form of:
     // `{ message: 'Error message' }`
-    handler: (user) => {
+    handler: async (user) => {
+      if (user.emailVerifiedAt == null) throw new Error('User not verified')
+      if (user.deletedAt != null) throw new Error('User not active')
+      // log activity
+      await db.user.update({
+        where: {id: user.id},
+        data: {
+          lastLoginAt: new Date()
+        }
+      })
       return user
     },
 
     errors: {
-      usernameOrPasswordMissing: 'Both username and password are required',
-      usernameNotFound: 'Username ${username} not found',
+      usernameOrPasswordMissing: 'Both email and password are required',
+      usernameNotFound: 'Wrong credentials',
       // For security reasons you may want to make this the same as the
       // usernameNotFound error so that a malicious user can't use the error
       // to narrow down if it's the username or password that's incorrect
-      incorrectPassword: 'Incorrect password for ${username}',
+      incorrectPassword: 'Wrong credentials',
     },
 
     // How long a user will remain logged in, in seconds
@@ -84,26 +101,28 @@ export const handler = async (
     // in. Return `false` otherwise, and in the Reset Password page redirect the
     // user to the login page.
     handler: (_user) => {
+      if (_user.deletedAt != null) throw new Error('User not active')
       return true
     },
 
     // If `false` then the new password MUST be different from the current one
-    allowReusedPassword: true,
+    allowReusedPassword: false,
 
     errors: {
       // the resetToken is valid, but expired
-      resetTokenExpired: 'resetToken is expired',
+      resetTokenExpired: 'token is expired',
       // no user was found with the given resetToken
-      resetTokenInvalid: 'resetToken is invalid',
+      resetTokenInvalid: 'token is invalid',
       // the resetToken was not present in the URL
-      resetTokenRequired: 'resetToken is required',
+      resetTokenRequired: 'token is required',
       // new password is the same as the old password (apparently they did not forget it)
       reusedPassword: 'Must choose a new password',
     },
   }
 
   interface UserAttributes {
-    name: string
+    firstName: string
+    lastName: string
   }
 
   const signupOptions: DbAuthHandlerOptions<
@@ -125,33 +144,70 @@ export const handler = async (
     //
     // If this returns anything else, it will be returned by the
     // `signUp()` function in the form of: `{ message: 'String here' }`.
-    handler: ({
-      username,
+    handler: async ({
+      username: email,
       hashedPassword,
       salt,
       userAttributes: _userAttributes,
     }) => {
-      return db.user.create({
-        data: {
-          email: username,
-          hashedPassword: hashedPassword,
-          salt: salt,
-          // name: userAttributes.name
-        },
-      })
+      const { firstName, lastName } = _userAttributes
+      const ipAddress = ({ event }) => {
+        return event?.headers?.['client-ip'] || event?.requestContext?.identity?.sourceIp || 'localhost'
+      }
+      logger.debug(ipAddress({ event }))
+      const token = nanoid()
+      // const user = await db.user.create({
+      //   data: {
+      //     email,
+      //     hashedPassword,
+      //     salt,
+      //     profile: {
+      //       create: {
+      //         firstName,
+      //         lastName,
+      //         unusual: true
+      //       }
+      //     }
+      //   },
+      // })
+      // await db.verificationToken.create({
+      //   data: {
+      //     token,
+      //     identifier: user.email,
+      //     expires: add(new Date(), { minutes: 15 }),
+      //   },
+      // })
+      // Send verification email
+      logger.debug(token)
+      // await mailer.send(
+      //   VerifyEmail({
+      //     token,
+      //   }),
+      //   {
+      //     to: user.email,
+      //     subject: 'Verify Your Email',
+      //     from: 'no.reply@peerwood.io',
+      //   }
+      // )
+      return false
     },
 
     // Include any format checks for password here. Return `true` if the
     // password is valid, otherwise throw a `PasswordValidationError`.
     // Import the error along with `DbAuthHandler` from `@redwoodjs/api` above.
     passwordValidation: (_password) => {
+      if (_password.length < 8) {
+        throw new PasswordValidationError(
+          'Password must be at least 8 characters'
+        )
+      }
       return true
     },
 
     errors: {
       // `field` will be either "username" or "password"
       fieldMissing: '${field} is required',
-      usernameTaken: 'Username `${username}` already in use',
+      usernameTaken: 'Email already in use',
     },
   }
 

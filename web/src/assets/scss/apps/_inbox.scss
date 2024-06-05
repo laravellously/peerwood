@@ -85,11 +85,9 @@ $ibx-aside-width :      260px;
     position: relative;
     display: flex;
     overflow: hidden;
+    min-height: calc(100vh - (#{$header-height} + 64px));
+    max-height: calc(100vh - (#{$header-height} + 64px));
     background: $white;
-    border:1px solid $border-color;
-    border-radius: $border-radius;
-    min-height: calc(100vh - (#{$header-height} + 64px + 64px));
-    max-height: calc(100vh - (#{$header-height} + 64px + 64px));
     &-aside{
         position: absolute;
         background: $white;
@@ -112,17 +110,17 @@ $ibx-aside-width :      260px;
         &.content-active{
             transform: none;
         }
-        .simplebar-content{
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
     }
     &-nav{
         overflow: auto;
         flex-grow: 1;
         height: 100%;
         max-width: 100%;
+        .simplebar-content{
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
         &-head{
             display: flex;
             align-items: center;
@@ -232,7 +230,7 @@ $ibx-aside-width :      260px;
             .badge{
                 margin-left: auto;
                 min-width: 2.25rem;
-                justify-content: center;
+                justify-content: center; 
             }
             .active &{
                 .icon{
@@ -301,9 +299,9 @@ $ibx-aside-width :      260px;
         padding-bottom: 1.75rem;
     }
     &-status{
+        margin-top: auto;
         background: $lighter;
         padding: 1.5rem 1.5rem;
-        margin-top: auto;
         &-info{
             margin-bottom: 0.5rem;
             .icon{
@@ -525,19 +523,18 @@ $ibx-aside-width :      260px;
             position: static;
             transform: none;
             transition: none;
-            height: calc(100vh - 196px);
+            height: calc(100vh - 128px);
         }
         &-menu,&-label,&-contact{
             padding-left: 1rem;
             padding-right: 1rem;
-        } 
+        }
         &-menu{
             padding-top: 1rem;
         }
         &-contact{
             padding-bottom: 1rem;
         }
-
         &-nav{
             &-head{
                 padding-left: 1.75rem;
@@ -578,7 +575,19 @@ $ibx-aside-width :      260px;
                 width: 200px;
             }
             &-time{
-                margin-right: 2rem;
+                margin-right: 5rem;
+            }
+        }
+    }
+}
+@include media-breakpoint-up(xxl){
+    .nk-ibx{
+        &-item{
+            &-user{
+                width: 260px;
+            }
+            &-tools{
+                margin-left: 5rem;
             }
         }
     }
@@ -628,9 +637,9 @@ $ibx-aside-width :      260px;
             }
             &-tools{
                 position: absolute;
-                bottom: 18px;
-                right: 28px;
                 text-align: right;
+                right: 28px;
+                bottom: 18px;
             }
             &-star{
                 position: absolute;

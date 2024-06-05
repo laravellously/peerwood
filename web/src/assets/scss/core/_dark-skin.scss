@@ -124,7 +124,7 @@ body.dark-mode {
 
     $bg-mix: $dark-card-bg;
     $bg-colors: 
-    "dark"              mix($dark, $bg-mix, 20%),
+    "dark"              $light-100,
     "blue-dim"          mix($blue, $bg-mix, 15%),
     "azure-dim"         mix($azure, $bg-mix, 15%),
     "indigo-dim"        mix($indigo, $bg-mix, 15%),
@@ -373,7 +373,7 @@ body.dark-mode {
     .border,.border-bottom, .border-top, .border-start, .border-end,
     .dropdown-inner + .dropdown-inner,.dropdown-head,.dropdown-foot,
     .preview-hr,.preview-icon-box,.select2-container--default .select2-selection--single,
-    .ql-picker-options,
+    .ql-picker-options,.dropzone,
     .select2-container--default .select2-selection--multiple,.select2-dropdown,
     .select2-container--default .select2-search--dropdown .select2-search__field,
     .ui-timepicker-standard,.ql-toolbar,.ql-container,.note-editor,.note-toolbar,
@@ -389,8 +389,12 @@ body.dark-mode {
     .nk-tb-item:not(:last-child) .nk-tb-col, .nk-activity-item:not(:last-child), 
     .nk-support-item:not(:last-child), .card-inner-group .card-inner:not(:last-child),
     .card-aside,.nav-tabs,.divider,.data-item:not(:last-child),.nk-footer,
-    .nav-switch-s2 .nav-link, .user-avatar-multiple .user-avatar {
+    .nav-switch-s2 .nav-link, .language-list li:not(:last-child) .language-item, .user-avatar-multiple .user-avatar {
         border-color: $dark-border-color !important;
+    }
+
+    .language-item:hover {
+        background-color: $dark-border-color !important;
     }
 
     .list-group-item{
@@ -408,8 +412,8 @@ body.dark-mode {
     }
 
     .table-active, .table-active > th, .table-active > td, .table-hover tbody tr:hover, 
-    .code-block .prettyprint,.card .prettyprint,.list-group-item,.example-spacing-pd > div > span,
-    .custom-file-label::after,.ql-picker-options,.data-more:before,
+    .code-block .prettyprint,.list-group-item,.example-spacing-pd > div > span,
+    .custom-file-label::after,.ql-picker-options,.data-more:before,.search-wrap,.form-control,.input-mail,.dropzone,
     .ui-state-hover,.note-editor.note-frame .note-statusbar, 
     .note-editor.note-airframe .note-statusbar,.swal2-popup, 
     .select2-container--default .select2-results__option--highlighted[aria-selected],
@@ -436,7 +440,7 @@ body.dark-mode {
     .icon-overlap li {
         border-color: $dark-card-bg;
     }
-    .card,.kanban-add-task,.kanban-board-header,.kanban-item, .table > :not(caption) > * > * { 
+    .card,.kanban-add-task,.kanban-board-header,.kanban-item, .table > :not(caption) > * > * {
         background: $dark-card-bg;
     }
     .accordion,.form-clip, .form-text-hint,.card-aside,
@@ -456,10 +460,8 @@ body.dark-mode {
         background: $dark-card-bg !important;
     }
 
-    .tox .tox-menubar + .tox-toolbar,
-    .tox .tox-menubar + .tox-toolbar-overlord .tox-toolbar__primary {
-        border-top: 1px solid $dark-border-color !important;
-        margin-top: -1px !important;
+    .search-wrap.search-wrap-extend, .search-wrap.search-wrap-extend .form-control {
+        background: $dark-body-bg !important;
     }
 
     .clipboard-success-message {
@@ -478,6 +480,7 @@ body.dark-mode {
     .bs-popover-bottom .popover-header::before, .bs-popover-auto[data-popper-placement^=bottom] .popover-header::before{
         border-color: $dark-border-color;
     }
+
     .bs-popover-top > .popover-arrow::before, .bs-popover-auto[data-popper-placement^=top] > .popover-arrow::before{
         border-top-color: $dark-border-color !important;
     }
@@ -512,7 +515,6 @@ body.dark-mode {
     .input-mail,.form-control,.form-control:focus,.form-label,.form-label-outlined,.input-group-text,.table .table-light th, .table-hover tbody tr:hover, 
     .close,.close:hover,.user-name,.nk-news-text p,
     .data-item:hover .icon,
-    .swal2-title,
     .accordion-icon {
         color: $white !important;
     }
@@ -636,7 +638,7 @@ body.dark-mode {
     }
 
     .note-editor .btn, .ql-picker, .tox .tox-tbtn__select-label, .tox .tox-mbtn__select-label, .lead-text span,
-    .data-list-s2 .data-label, .btn-trigger, .list-step li.list-step-done {
+    .data-list-s2 .data-label, .btn-trigger,.list-step li.list-step-done {
         color: $base-400;
     }
     .ql-fill, .ql-stroke.ql-fill, .tox .tox-tbtn svg {
@@ -729,12 +731,12 @@ body.dark-mode {
     }
 
     // Apps
-    .nk-chat-aside-user .title,.nk-file-name,.nk-file-name-text a.title, 
+    .nk-chat-aside-user .title,.nk-file-name,.nk-file-name-text a.title,
     .is-unread .nk-ibx-context-text .heading, .chat-profile-settings .custom-control-sm .custom-control-label,
     .attach-info,.profile-stats .amount,.is-unread .chat-from .name{
         color: $white;
     }
-    .nk-fmg-menu-item .icon, .nk-ibx-menu-item .icon, .nk-iv-wg5-ck-result .text-lead {
+    .nk-fmg-menu-item .icon, .nk-ibx-menu-item .icon {
         color: $base-400;
     }
 
@@ -755,7 +757,7 @@ body.dark-mode {
     .nk-msg,.nk-msg-head,.nk-msg-profile,.attach-files,.attach-foot,
     .nk-msg-item:not(:last-child),.nk-msg-aside,.nk-msg-nav,
     .nk-msg-nav .search-wrap,
-    .nk-files-group > .title,.nk-file-share-header, 
+    .nk-files-group > .title,.nk-file-share-header,
     .nk-files-view-list .nk-file > div{
         border-color: $dark-border-color !important;
     }
@@ -794,7 +796,7 @@ body.dark-mode {
     .fav-list .user-avatar:after {
         background: lighten($dark-card-bg, 25%);
     }
-    
+
     .nk-ibx-item:not(.no-hover):hover, .nk-ibx-item.active,
     .nk-ibx-item:hover .ibx-actions-hidden,.nk-ibx-item:hover .ibx-actions,
     .nk-ibx-label > li:hover, .nk-ibx-contact > li:hover,
@@ -824,7 +826,6 @@ body.dark-mode {
     }
     .nk-reply-form-attachment-list {
         background: $dark-body-bg-light;
-        //color: $base-300;
     }
 
     // Full Calendar
@@ -1010,12 +1011,62 @@ body.dark-mode {
     .swal2-container.swal2-backdrop-show {
         background: rgba($black, .85);
     }
-    .swal2-html-container {
-        color: $base-400;
-    }
     .modal-backdrop {
         opacity: .9;
         background: rgba($black, .9);
+    }
+
+    //Crypto
+    .nk-sidebar .nk-menu > li:hover > a, .nk-sidebar .nk-menu > li.active > a, 
+    .nk-sidebar .nk-menu > li.current-menu > a,.wallet-item a:before {
+        background: lighten($sidebar-bg-dark-color,5%);
+    }
+    .is-light .nk-sidebar-footer,.is-dark .nk-sidebar-footer,.is-theme .nk-sidebar-footer,.nk-sidebar-footer{
+        background: $sidebar-bg-dark-color;
+    }
+
+    .buysell-cc-choosen, .buysell-cc-chosen,.buysell-pm-list{
+        background: $dark-card-bg;
+    }
+    .nk-wgw-add a .add-icon:before{
+        background: $dark-body-bg;
+    }
+
+    .card.is-dark{
+        background: $accent-dark !important;
+        border-color: $accent-dark;
+    }
+    .tranx-item:not(:last-child),.nk-refwg .nk-refwg-invite,.nk-wgw-actions,
+    .card-custom-s1 .card-inner-group,.nk-kyc-app-icon .icon,.nk-kycfm-head:not(:last-child), 
+    .nk-kycfm-content:not(:last-child), .nk-kycfm-footer:not(:last-child){
+        border-color: $dark-border-color;
+    }
+    .nk-wg4-switcher > li > .dropdown > a, .buysell-cc-choosen, .buysell-cc-chosen,.nk-kycfm-label,
+    .buysell-cc-item:not(:last-child),.buysell-cc-dropdown .dropdown-menu,
+    .buysell-pm-list,.buysell-pm-item:not(:last-child),.buysell-overview-list,
+    .buysell-overview-item:not(:last-of-type){
+        border-color: lighten($dark-card-bg, 20%);
+    }
+    .buysell-pm-label:before {
+        border-color: lighten($dark-card-bg, 30%);
+    }
+    .nk-kycfm-count {
+        border-color: darken($base-400, 5%);
+        color: $base-400;
+    }
+
+    .tranx-label,.nk-wg1-title,.lead-text-lg,.is-dark .nk-wgw-balance .amount,.coin-name,.nk-wg7-stats .number-lg,.nk-wg7-stats .number,
+    .buysell-pm-label .pm-name,.nk-kyc-app-icon .icon,.wallet-balance,.nk-wg5-amount .amount{
+        color: $white !important;
+    }
+    .nk-wgw-balance .amount,.tranx-amount .number,.user-balance-alt, .tranx-amount .number-sm, .nk-wgw-actions a{
+        color: $base-300;
+    }
+    .nk-wgw-balance .amount-sm, .tranx-amount .number span {
+        color: $base-400;
+    }
+    .is-dark .nk-wgw-balance .amount-sm {
+        color: $accent-400;
     }
 
     //Saparated Table / 
@@ -1483,6 +1534,7 @@ body.dark-mode {
         background-color: $accent-color ;
         color: #fff;
     }
+
     // rdt_Table 
     .rdt_TableRow, .rdt_TableHeadRow, .rdt_Table {
         background: $dark-card-bg;
@@ -1492,7 +1544,7 @@ body.dark-mode {
     .rdt_TableCol {
         color: $base-300 !important;
     }
-    
+
     // rdl
     .rdl-control {
         background-color: $dark-card-bg !important;
@@ -1533,6 +1585,5 @@ body.dark-mode {
     .Toastify__toast {
         background: $dark-card-bg !important;
         color: $white !important;
-      }
+    }
 }
-

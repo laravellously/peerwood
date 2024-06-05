@@ -49,7 +49,7 @@ export const getCurrentUser = async (session: Decoded) => {
 
   return await db.user.findUnique({
     where: { id },
-    select: { email: true, emailVerifiedAt: true, lastLoginAt: true, profile: true },
+    select: { id: true, email: true, emailVerifiedAt: true, lastLoginAt: true, profile: true },
   })
 }
 

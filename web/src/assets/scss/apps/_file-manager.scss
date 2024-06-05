@@ -9,9 +9,9 @@ $file-desc-sap:           $ni-dot !default;
 /// Layout for FMG
 .nk-fmg{
     position: relative;
-    border: 1px solid $border-color;
-    border-radius: $border-radius;
-    background-color: rgba($white,.4);
+    background-color: $white;
+    min-height: calc(100vh - (#{$header-height} + 64px));
+    background-color: rgba($lighter,.6);
     &-aside{
         position: fixed;
         width: $fmg-aside-width;
@@ -44,6 +44,7 @@ $file-desc-sap:           $ni-dot !default;
             flex-direction: column; 
         }
         &-top{
+            margin-bottom: auto;
             margin-bottom: 30px;
         }
     }
@@ -51,6 +52,7 @@ $file-desc-sap:           $ni-dot !default;
         padding: 1rem;
         li{
             margin: 2px 0;
+            
         }
         &-item{
             position: relative;
@@ -91,7 +93,7 @@ $file-desc-sap:           $ni-dot !default;
             .active > .nk-fmg-menu-item > &{
                 color: $accent-color;
             }
-        }
+        } 
         li ul {
             margin-top: -0.125rem;
             margin-bottom: 0.5rem;
@@ -151,7 +153,6 @@ $file-desc-sap:           $ni-dot !default;
             padding: .75rem 1.25rem;
             border-bottom: 1px solid $border-color;
             background-color: $white;
-            top: $header-height;
             z-index: 9;
             position: relative;
             top: 0;
@@ -185,8 +186,8 @@ $file-desc-sap:           $ni-dot !default;
         }
     }
     &-switch{
-        border-top: 1px solid $border-light;
         background-color: transparent;
+        border-top: 1px solid $border-light;
         > div{
             width: 100%;
         }
@@ -235,14 +236,13 @@ $file-desc-sap:           $ni-dot !default;
             transform: none;
             transition: none;
             width: $fmg-aside-width;
-            left: $sidebar-width-apps;
-            min-height: 100%;
-            max-height: 100%;
             position: absolute;
             top: 0;
             left: 0;
             border-top-left-radius: $border-radius;
             border-bottom-left-radius: $border-radius;
+            min-height: 100%;
+            max-height: 100%;
             &-top{
                 flex-grow: 0;
             }
@@ -389,11 +389,11 @@ $file-desc-sap:           $ni-dot !default;
                 content:$file-desc-sap;
                 font-family: $nk-dashlite-font;
                 position: absolute;
-                left: 0;
                 top: 50%;
+                left: 0;
+                transform: translate(-50%,-50%);
                 font-size: 11px;
                 line-height: 10px;
-                transform: translate(-50%,-50%);
                 opacity: .8;
             }
         }
@@ -610,6 +610,11 @@ $file-desc-sap:           $ni-dot !default;
                     }
                 }
             } 
+            &:not(:last-child){
+                > div{
+                    border-bottom: 1px solid $border-color;
+                }
+            } 
             .custom-checkbox{
                 margin-right: 1rem;
             }
@@ -686,8 +691,8 @@ $file-desc-sap:           $ni-dot !default;
             position: relative;
             margin: 8px;
             background: $white;
-            border: 1px solid $border-color;
             border-radius: $border-radius;
+            border: 1px solid $border-color;
             .nk-file-members{
                 display: none;
             }

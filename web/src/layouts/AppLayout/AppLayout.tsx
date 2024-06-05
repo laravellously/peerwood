@@ -1,3 +1,5 @@
+import 'src/assets/scss/dashlite.scss'
+
 import Footer from "../_shared/footer"
 import Header from "../_shared/header"
 import Sidebar from "../_shared/sidebar"
@@ -15,7 +17,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
         <AppWrap>
           <Header fixed className={''} />
           {children}
-          <Footer />
+          {/* <Footer /> */}
         </AppWrap>
       </AppMain>
     </AppRoot>

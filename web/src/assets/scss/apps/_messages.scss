@@ -13,12 +13,14 @@ $msg-body-gap-x-dsk :2.5rem;
         position: relative;
         border-bottom: 1px solid $border-light;
         padding: 0 $msg-item-gap-x;
-        background:$lighter;
+        background: $white;
         z-index: 2;
+        border-top-left-radius: ($border-radius - 1);
         .search-wrap{
             padding: 0 1rem;
             bottom: -1px;
             border-bottom: 1px solid $border-light;
+            border-radius: 0;
         }
         .search-submit {
             transform: translate(0.25rem, -50%);
@@ -72,11 +74,12 @@ $msg-body-gap-x-dsk :2.5rem;
     position: relative;
     display: flex;
     overflow: hidden;
+    background: $white;
+    // border:1px solid $border-color;
+    // border-radius: $border-radius;
     min-height: calc(100vh - (#{$header-height} + 64px));
     max-height: calc(100vh - (#{$header-height} + 64px));
-    background: $white;
     &-aside{
-        background: $lighter;
         width: 100%;
         overflow: hidden;
         max-height: 100%;
@@ -84,11 +87,9 @@ $msg-body-gap-x-dsk :2.5rem;
         display: flex;
         flex-direction: column;
         flex-shrink: 0;
-        .nk-msg-boxed &{
-            background: rgba($lighter,.7);
-            border-top-left-radius: ($border-radius - 1);
-            border-bottom-left-radius: ($border-radius - 1);
-        }
+        background: $white;
+        border-top-left-radius: ($border-radius - 1);
+         border-bottom-left-radius: ($border-radius - 1);
     }
 
     &-list{
@@ -105,9 +106,19 @@ $msg-body-gap-x-dsk :2.5rem;
         }
         cursor: pointer;
         &.active,&.current{
-            background: $white;
+            background: rgba($lighter, .7);
+            position: relative;
             cursor: default;
-        }
+            &:after {
+                position: absolute;
+                content: "";
+                left: 0;
+                top: 0;
+                height: 100%;
+                width: 3px;
+                background: $accent-color;
+            }
+        } 
     }
     &-info{
         max-width:calc(100% - 52px);
@@ -125,7 +136,6 @@ $msg-body-gap-x-dsk :2.5rem;
         margin-top: 0.25rem;
         .asterisk{
             margin-top: auto;
-            // moved to asterisk.scss
         }
     }
     &-sender{
@@ -303,13 +313,11 @@ $msg-body-gap-x-dsk :2.5rem;
 
 @include media-breakpoint-down(sm){
     .nk-msg{
-        &-boxed{
-            border: none;
-            border-radius: $border-radius;
-            min-height: calc(100vh - (#{$header-height}));
-            max-height: calc(100vh - (#{$header-height}));
-            // margin: -24px -18px; // @io-v2.0
-        }
+        border: none;
+        border-radius: $border-radius;
+        min-height: calc(100vh - (#{$header-height} + 64px));
+        max-height: calc(100vh - (#{$header-height} + 64px));
+        // margin: -24px -18px;
     }
 }
 @include media-breakpoint-up(sm){
@@ -390,18 +398,6 @@ $msg-body-gap-x-dsk :2.5rem;
     .profile-shown{
         .nk-msg-profile-toggle{
             right: 262px;
-            .has-apps-sidebar & {
-                right: -18px;
-            }
-        }
-    }
-}
-@media (max-width:1279px){
-    .has-apps-sidebar{
-        .profile-shown{
-            .nk-msg-profile-toggle{
-                right: 262px;
-            }
         }
     }
 }
@@ -409,15 +405,6 @@ $msg-body-gap-x-dsk :2.5rem;
     .nk-msg-body{
         &.profile-shown{
             padding-right: 280px;
-        }
-    }
-}
-@media (min-width:1280px){
-    .has-apps-sidebar{
-        .nk-msg-body{
-            &.profile-shown{
-                padding-right: 280px;
-            }
         }
     }
 }

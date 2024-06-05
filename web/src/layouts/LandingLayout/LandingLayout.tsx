@@ -1,7 +1,8 @@
+import 'src/assets/landing/dashlite.scss'
+
+
 import { Link } from "@redwoodjs/router"
 import { useEffect, useState } from "react"
-
-import 'src/assets/scss/landing/dashlite.scss'
 
 type LandingLayoutProps = {
   children?: React.ReactNode

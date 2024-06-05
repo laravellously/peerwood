@@ -50,6 +50,7 @@
         background: $header-bg-color;
         border-bottom: 1px solid $header-border-bottom;
         padding: 0 $header-main-gap-x;
+        z-index: 1010;
         @if($dark_option==true) {
             &.is-dark:not([class*=bg-]){
                 background: $header-bg-dark-color;
@@ -70,7 +71,6 @@
             top: 0;
             left: 0;
             right: 0;
-            z-index: 1010;
             min-width: $header-min-width;
             + .nk-content {
                 margin-top: $header-height;
@@ -236,75 +236,6 @@
                 padding-left: 44px;
                 padding-right: 44px;
             }
-        }
-    }
-}
-
-.nk-header{
-    &-menu{
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: 280px;
-        height: 100vh;
-        max-height: 100vh;
-        z-index: 999;
-        background: $white;
-        transform: translateX(-100%);
-        &-inner{
-            overflow: auto;
-            max-height: 100%;
-            min-height: 100%;
-        }
-        &.mobile-menu{
-            padding-top: 65px;
-            padding-left: 0;
-            padding-right: 0;
-            transition: transform .4s ease;
-        }
-        &.nk-sidebar-active{
-            transform: translateX(0);
-        }
-    }
-    &-mobile{
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 28px;
-        border-bottom: 1px solid $border-light;
-        .logo-dark {
-            opacity: 1;
-        }
-        .logo-light {
-            opacity: 0;
-        }
-        .nk-nav-toggle.nk-quick-nav-icon{
-            color: $base-text;
-            &:before{
-                background-color: $light-200;
-            }
-        }
-    }
-}
-@include media-breakpoint-up(lg){
-    .nk-header{
-        &-menu{
-            .nk-header-mobile{
-                display: none;
-            }
-            position: static;
-            background: transparent;
-            height: auto;
-            max-height: auto;
-            border-right: none;
-            width: auto;
-            padding: 0;
-            overflow: visible;
-            transform: translateX(0) !important;
         }
     }
 }

@@ -1,6 +1,3 @@
-$breadcrumb-arrow-ltr: $ni-forward-ios !default;
-$breadcrumb-arrow-rtl: $ni-back-ios !default;
-
 .breadcrumb{
     &-item{
         font-size: $breadcrumb-font-size;
@@ -18,7 +15,7 @@ $breadcrumb-arrow-rtl: $ni-back-ios !default;
         + .breadcrumb-item::before{
             .breadcrumb-arrow &{
                 font-family: $nk-dashlite-font;
-                content: $breadcrumb-arrow-ltr;
+                content: $ni-forward-ios;
             }
         }
         &.active {
@@ -28,8 +25,6 @@ $breadcrumb-arrow-rtl: $ni-back-ios !default;
         }
     }
 }
-
-//@i v150
 .breadcrumb-alt{
     .breadcrumb{
         &-item{

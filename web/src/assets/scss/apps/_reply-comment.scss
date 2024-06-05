@@ -16,7 +16,7 @@ $reply-body-gap-x-dsk :2.5rem;
         }
         
         > div:not(.nk-reply-header){
-            margin-left: 48px;
+margin-left: 48px;
         }
     }
     &-header{
@@ -228,9 +228,9 @@ $reply-body-gap-x-dsk :2.5rem;
                 padding: .1875rem 0;
                 .label{
                     width: 75px;
-                    text-align: right;
                     color: $base-light;
                     font-size: $fx-sz-12;
+                    text-align: right;
                     margin-right: 0.75rem;
                 }
                 .info{
@@ -245,7 +245,7 @@ $reply-body-gap-x-dsk :2.5rem;
     &-tools{
         display: flex;
         align-items: center;
-        flex-shrink: 0;
+        flex-shrink: 0; 
         cursor: default;
         .date{
             margin-right: 1rem;
@@ -306,8 +306,8 @@ $reply-body-gap-x-dsk :2.5rem;
         &-tools{
             flex-wrap: wrap;
             .date{
-                font-size: $fx-sz-13;
                 margin-right: .5rem;
+                font-size: $fx-sz-13;
             }
             .attach-msg {
                 font-size: 1.25rem;
@@ -319,8 +319,8 @@ $reply-body-gap-x-dsk :2.5rem;
 @include media-breakpoint-down(sm){
     .nk-reply{
         &-info{
-            max-width: calc(100% - 2.5rem);
             margin-left: 0.75rem;
+            max-width: calc(100% - 2.5rem);
             .is-collapsed &{
                 max-width: calc(100% - 4.5rem);
             }
@@ -375,7 +375,7 @@ $reply-body-gap-x-dsk :2.5rem;
 @include media-breakpoint-up(sm){
     .nk-reply {
         &-form {
-            margin: 0 $reply-body-gap-x-tab $reply-body-gap-x-tab;
+            margin: .5rem $reply-body-gap-x-tab $reply-body-gap-x-tab;
             border: 1px solid $border-light;
             border-radius: $border-radius;
             &-header{
@@ -416,7 +416,7 @@ $reply-body-gap-x-dsk :2.5rem;
 @include media-breakpoint-up(lg){
     .nk-reply {
         &-form {
-            margin: 0 $reply-body-gap-x-dsk $reply-body-gap-x-dsk;
+            margin: .5rem $reply-body-gap-x-dsk $reply-body-gap-x-dsk;
         }
         &-item{
             padding: 2rem $reply-body-gap-x-dsk;

@@ -1,4 +1,4 @@
-import { Link, NavLink } from "@redwoodjs/router";
+import { Link, NavLink, useMatch } from "@redwoodjs/router";
 import classNames from "classnames";
 import { useEffect, useState } from "react";
 import Icon from "src/components/Icon/Icon";
@@ -51,15 +51,18 @@ const menu = [
 // };
 
 const PanelItem = ({ icon, link, text, sidebarToggle, mobileView, ...props }) => {
+  const matchInfo = useMatch(link)
   const menuItemClass = classNames({
     "nk-menu-item": true,
+    "active current-page": matchInfo.match,
   });
 
   return (
     <li className={menuItemClass}>
-      <Link
+      <NavLink
         to={link}
         className="nk-menu-link"
+        activeClassName="active"
         // onClick={() => setMenuData([menu[index]])}
       >
         {icon ? (
@@ -68,7 +71,7 @@ const PanelItem = ({ icon, link, text, sidebarToggle, mobileView, ...props }) =>
           </span>
         ) : null}
         <span className="nk-menu-text">{text}</span>
-      </Link>
+      </NavLink>
     </li>
   );
 };

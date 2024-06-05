@@ -4,6 +4,7 @@
 
 @use 'sass:math';
 $font-url: '../../../fonts';
+
 /////////    COLORS    ///////////
 //////////////////////////////////////
 $white:		#fff;
@@ -51,15 +52,15 @@ $base-light:  		$base-400;
 $base-dim:  		mix($base-color,$white, 8%);
 
 // Base/Default color @used for text
-$accent-100:  		#eff1ff;
-$accent-200:  		#e3e7fe;
-$accent-300:  		#c4cefe;
-$accent-400:  		#9cabff;
-$accent-500:  		#798bff;
+$accent-100:        #e1eeff;
+$accent-200:        #cee3ff;
+$accent-300:        #a9cdff;
+$accent-400:        #6baafe;
+$accent-500:        #3a8dfe;
 
-$accent-color:  	#6576ff;
-$accent-light:  	$accent-300;
-$accent-dark:  		#2c3782;
+$accent-color:      #0971fe;
+$accent-light:      $accent-300;
+$accent-dark:       #0b3175;
 $accent-dim:  	    #e3e7fe;
 
 
@@ -156,7 +157,7 @@ $fx-sz-15:			15px;
 $fx-sz-16:			16px;
 
 $gutter-width:           28px;
-$stretch-gap-x:          (4px + math.div($gutter-width, 2));
+$stretch-gap-x:          (4px + math.div($gutter-width,2));
 
 /////////    TYPTOGRAPHY    //////////
 //////////////////////////////////////
@@ -398,8 +399,8 @@ $input-height-inner:                    $input-line-height + $input-padding-y * 
 $input-height-inner-sm:                 $input-line-height-sm + $input-padding-y-sm * 2;
 $input-height-inner-lg:                 $input-line-height-lg + $input-padding-y-lg * 2;
 $input-height-inner-xl:                 $input-line-height-xl + $input-padding-y-xl * 2;
-$input-height-inner-half:               $input-line-height * .5 + $input-padding-y;
-$input-height-inner-quarter:            $input-line-height * .25 + math.div($input-padding-y , 2);
+$input-height-inner-half:               add($input-line-height * .5, $input-padding-y);
+$input-height-inner-quarter:            add($input-line-height * .25, math.div($input-padding-y , 2));
 
 $input-height:                          calc(#{$input-height-inner} + #{$input-height-border});
 $input-height-sm:                       calc(#{$input-height-inner-sm} + #{$input-height-border});
@@ -724,15 +725,13 @@ $logo-height-icon:                  33px;
 
 // Sidebar
 $sidebar-width-normal:              290px;
-$sidebar-width-compact:             74px;
+$sidebar-width-short:               81px;
 $sidebar-gap-x:                     24px;
 
 $sidebar-width-fat:                 400px;
 $sidebar-width-fat-tablet:          340px;
 $sidebar-gap-x-fat:                 32px;
 $sidebar-gap-x-fat-tablet:          16px;
-$sidebar-fat-transition-name:       ease;
-$sidebar-fat-transition-duration:   450ms;
 
 // Apps Sidebar
 $sidebar-width-apps:                 80px;
@@ -826,5 +825,5 @@ $gd_investment:         true;
 /////////    THIRD-PARTY VARIABLE    //////////
 ///////////////////////////////////////////////
 $nk-dashlite-font: "Nioicon";
-$nk-dashlite-font-url: "../fonts";
+$nk-dashlite-font-url: "../../../fonts";
 @import "vendors/nioicon/variables";

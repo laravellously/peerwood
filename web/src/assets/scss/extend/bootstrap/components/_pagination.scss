@@ -9,7 +9,6 @@
 
 .page{
     &-link{
-        // @include border-radius($border-radius);
         font-size: $pagination-font-size;
         display: inline-flex;
         align-items: center;
@@ -37,7 +36,6 @@
         &:not([href]){
             background-color: transparent;
             color: inherit;
-            // height: 100%;
             .icon{
                 &:before{
                     position: relative;

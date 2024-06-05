@@ -1,5 +1,4 @@
 $alert-dismissible-close-icon: $ni-cross;
-
 .alert{
     &:last-child{
         margin-bottom: 0;
@@ -34,7 +33,7 @@ $alert-dismissible-close-icon: $ni-cross;
             position: absolute;
             right: 0;
             padding: 1rem 1.25rem;
-            color: currentColor;
+            color: inherit;
             &:focus{
                 outline: none;
             }
@@ -84,7 +83,6 @@ $alert-dismissible-close-icon: $ni-cross;
             }
         }
     }
-    //@i-v140-e-
 }
 a.alert:hover{
     color: currentColor;

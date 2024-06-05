@@ -20,7 +20,7 @@ const LanguageHead = () => {
         onClick={(ev) => ev.preventDefault()}
         className="dropdown-toggle nk-quick-nav-icon"
       >
-        <Avatar className="border border-light xs">
+        <Avatar className="border border-light sm">
           <img src={EnglishFlag} alt="" />
         </Avatar>
       </DropdownToggle>

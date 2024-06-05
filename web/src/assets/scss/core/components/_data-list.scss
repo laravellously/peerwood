@@ -9,7 +9,6 @@
         padding: 1rem 1.25rem;
         display: flex;
         align-items: center;
-        cursor: pointer;
         .icon{
             color: $base-light;
             text-align: center;
@@ -21,7 +20,11 @@
         &:not(:last-child){
             border-bottom: 1px solid $border-light;
         }
+        &[data-toggle]{
+            cursor: pointer;
+        }
         &:hover{
+            // background-color: $lighter;
             .data-label{
                 color: $base-text;
             }

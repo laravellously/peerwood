@@ -40,9 +40,7 @@
     margin-bottom: 0;
     border-radius: $border-radius;
 }
-.card-preview {
-    border:1px solid $border-color; 
-}
+
 .code-block{
     position: relative;
     border: 1px solid $border-color; 
@@ -112,6 +110,7 @@
             position: relative;
             padding: 25px 20px;
             text-align: center;
+            border: 1px solid $border-color;
             .btn-clipboard{
                 position: absolute;
                 top: 0;
@@ -261,6 +260,9 @@
         font-family: $base-font-family;
         font-weight: $fw-medium;
     }
+    .card-preview{
+        border: 1px solid $border-color;
+    }
     .card-preview > .card-inner{
         padding: 1.25rem;
     }
@@ -311,6 +313,7 @@
         }
     }
 }
+
 
 // DEMO Settings Panel for Preview
 ////////////////////////////////////////////
@@ -835,3 +838,4 @@ $dark-border-color: lighten($darker, 8%) !default;
         border-color: $dark-border-color;
     }
 }
+
