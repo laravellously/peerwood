@@ -1,26 +1,24 @@
-import classNames from "classnames";
 import { useState } from "react";
 import { Dropdown, DropdownMenu, DropdownToggle } from "reactstrap";
+import { useAuth } from "src/auth";
 import Icon from "src/components/Icon/Icon";
-import data from "src/data/notifications";
+import NotificationsByUserCell from 'src/components/NotificationsByUserCell';
 import { useThemeUpdate } from "src/providers/theme";
 
-const NotificationItem = (props) => {
-  const { icon, iconStyle, text, time, id } = props;
-  return (
-    <div className="nk-notification-item" key={id} id={id}>
-      <div className="nk-notification-icon">
-        <Icon name={icon} className={classNames([`icon-circle ${iconStyle ? " " + iconStyle : ""}`])} />
-      </div>
-      <div className="nk-notification-content">
-        <div className="nk-notification-text">{text}</div>
-        <div className="nk-notification-time">{time}</div>
-      </div>
-    </div>
-  );
-};
+// const NOTIFICATIONS_QUERY: TypedDocumentNode = gql`
+// query GetNotificationsByUser($userId: String!) {
+//   notificationsByUser(userId: $userId) {
+//     id
+//     message
+//     createdAt
+//   }
+// }
+// `
+
 
 const Notifications = () => {
+  const { currentUser } = useAuth()
+  // const { data } = useQuery(NOTIFICATIONS_QUERY, { variables: { userId: currentUser.id } })
   const themeUpdate = useThemeUpdate();
   const [open, setOpen] = useState(false);
   const toggle = () => {
@@ -36,32 +34,21 @@ const Notifications = () => {
       </DropdownToggle>
       <DropdownMenu end className="dropdown-menu-xl dropdown-menu-s1">
         <div className="dropdown-head">
-          <span className="sub-title nk-dropdown-title">{data.title}</span>
+          <span className="sub-title nk-dropdown-title">Notifications</span>
           <a href="#markasread" onClick={(ev) => ev.preventDefault()}>
             Mark All as Read
           </a>
         </div>
         <div className="dropdown-body">
           <div className="nk-notification">
-            {data.notification.map((item) => {
-              return (
-                <NotificationItem
-                  key={item.id}
-                  id={item.id}
-                  icon={item.icon}
-                  iconStyle={item.iconStyle}
-                  text={item.text}
-                  time={item.time}
-                />
-              );
-            })}
+            <NotificationsByUserCell userId={currentUser.id} />
           </div>
         </div>
-        <div className="dropdown-foot center">
+        {/* <div className="dropdown-foot center">
           <a href="#viewall" onClick={(ev) => ev.preventDefault()}>
             View All
           </a>
-        </div>
+        </div> */}
       </DropdownMenu>
     </Dropdown>
   );

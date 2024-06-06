@@ -1,13 +1,19 @@
 export const schema = gql`
   type Wallet {
     id: String!
-    userId: String!
     address: String!
     label: String!
     passphrase: String!
-    coinId: String!
-    coin: Coin!
+    userId: String!
+    user: User!
+    coinId: String
+    fiat: Fiat
+    fiatId: String
+    coin: Coin
     transactions: [Transaction]!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    deletedAt: DateTime
   }
 
   type Query {
@@ -16,19 +22,23 @@ export const schema = gql`
   }
 
   input CreateWalletInput {
-    userId: String!
     address: String!
     label: String!
     passphrase: String!
-    coinId: String!
+    userId: String!
+    coinId: String
+    fiatId: String
+    deletedAt: DateTime
   }
 
   input UpdateWalletInput {
-    userId: String
     address: String
     label: String
     passphrase: String
+    userId: String
     coinId: String
+    fiatId: String
+    deletedAt: DateTime
   }
 
   type Mutation {

@@ -40,6 +40,10 @@ COPY --from=web_build /app/web/dist /app/web/dist
 COPY --from=api_build /app/api /app/api
 COPY --from=api_build /app/node_modules/.prisma /app/node_modules/.prisma
 
+ENV REDWOOD_ENV_BASE_URL=https://peerwood.fly.dev
+ENV REDWOOD_ENV_SCREENSHOT_URL=https://peerwood.fly.dev
+ENV RWJS_EXP_SSR_GRAPHQL_ENDPOINT=http://127.0.0.1:8910/.redwood/functions/graphql
+
 COPY .fly .fly
 
 ENTRYPOINT ["sh"]

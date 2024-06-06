@@ -2,15 +2,12 @@ import type { APIGatewayProxyEvent, Context } from 'aws-lambda'
 
 import { customAlphabet } from 'nanoid'
 
-import { DbAuthHandler, PasswordValidationError } from '@redwoodjs/auth-dbauth-api'
 import type { DbAuthHandlerOptions, UserType } from '@redwoodjs/auth-dbauth-api'
+import { DbAuthHandler, PasswordValidationError } from '@redwoodjs/auth-dbauth-api'
 
+import { add } from 'date-fns/add'
 import { cookieName } from 'src/lib/auth'
 import { db } from 'src/lib/db'
-import { add } from 'date-fns/add'
-import { mailer } from 'src/lib/mailer'
-import VerifyEmail from 'src/mail/Auth/VerifyEmail'
-import { logger } from 'src/lib/logger'
 
 const nanoid = customAlphabet('0123456789', 6)
 
@@ -72,11 +69,23 @@ export const handler = async (
     handler: async (user) => {
       if (user.emailVerifiedAt == null) throw new Error('User not verified')
       if (user.deletedAt != null) throw new Error('User not active')
+      const DEFAULT_USERAGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 OPR/110.0.0.0'
+      const ipAddress = ({ event }: { event: APIGatewayProxyEvent }): string => event.headers?.['fly-client-ip'] || '127.0.0.1'
+      const userAgent = ({ event }: { event: APIGatewayProxyEvent }): string => event.headers?.['user-agent'] || DEFAULT_USERAGENT
+      // console.debug(ipAddress({ event }))
+      // console.debug(event.headers)
       // log activity
       await db.user.update({
-        where: {id: user.id},
+        where: { id: user.id },
         data: {
-          lastLoginAt: new Date()
+          lastLoginAt: new Date(),
+          activities: {
+            create: {
+              device: '',
+              browser: userAgent({ event }),
+              ip: ipAddress({ event })
+            }
+          }
         }
       })
       return user
@@ -151,34 +160,30 @@ export const handler = async (
       userAttributes: _userAttributes,
     }) => {
       const { firstName, lastName } = _userAttributes
-      const ipAddress = ({ event }) => {
-        return event?.headers?.['client-ip'] || event?.requestContext?.identity?.sourceIp || 'localhost'
-      }
-      logger.debug(ipAddress({ event }))
       const token = nanoid()
-      // const user = await db.user.create({
-      //   data: {
-      //     email,
-      //     hashedPassword,
-      //     salt,
-      //     profile: {
-      //       create: {
-      //         firstName,
-      //         lastName,
-      //         unusual: true
-      //       }
-      //     }
-      //   },
-      // })
-      // await db.verificationToken.create({
-      //   data: {
-      //     token,
-      //     identifier: user.email,
-      //     expires: add(new Date(), { minutes: 15 }),
-      //   },
-      // })
+      const user = await db.user.create({
+        data: {
+          email,
+          hashedPassword,
+          salt,
+          profile: {
+            create: {
+              firstName,
+              lastName,
+              unusual: true
+            }
+          }
+        },
+      })
+      await db.verificationToken.create({
+        data: {
+          token,
+          identifier: user.email,
+          expires: add(new Date(), { minutes: 15 }),
+        },
+      })
       // Send verification email
-      logger.debug(token)
+      console.debug(token)
       // await mailer.send(
       //   VerifyEmail({
       //     token,

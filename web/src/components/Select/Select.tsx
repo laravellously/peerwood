@@ -1,10 +1,16 @@
-const Select = () => {
-  return (
-    <div>
-      <h2>{'Select'}</h2>
-      <p>{'Find me in ./web/src/components/Select/Select.tsx'}</p>
-    </div>
-  )
-}
+import React from "react";
+import Select from "react-select";
 
-export default Select
+const RSelect = ({ ...props }) => {
+  return (
+    <div className="form-control-select">
+      <Select
+        className={`react-select-container ${props.className ? props.className : ""}`}
+        classNamePrefix="react-select"
+        {...props}
+      />
+    </div>
+  );
+};
+
+export default RSelect;

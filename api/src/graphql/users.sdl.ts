@@ -8,9 +8,6 @@ export const schema = gql`
     resetTokenExpiresAt: DateTime
     emailVerifiedAt: DateTime
     lastLoginAt: DateTime
-    updatedAt: DateTime!
-    createdAt: DateTime!
-    deletedAt: DateTime
     referrals: [UserReferral]!
     profile: UserProfile
     kyc: UserKYC
@@ -18,6 +15,13 @@ export const schema = gql`
     deposits: [UserDeposit]!
     withdrawals: [UserWithdrawal]!
     tickets: [UserTicket]!
+    wallets: [Wallet]!
+    reviews: [Review]!
+    bought: [Trade]!
+    sold: [Trade]!
+    updatedAt: DateTime!
+    createdAt: DateTime!
+    deletedAt: DateTime
   }
 
   type Query {

@@ -6,6 +6,15 @@ export const userNotifications: QueryResolvers['userNotifications'] = () => {
   return db.userNotification.findMany()
 }
 
+export const notificationsByUser: QueryResolvers['notificationsByUser'] = ({
+  userId
+}) => {
+  return db.userNotification.findMany({
+    where: { userId },
+    take: 5
+  })
+}
+
 export const userNotification: QueryResolvers['userNotification'] = ({
   id,
 }) => {

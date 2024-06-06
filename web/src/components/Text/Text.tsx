@@ -1,10 +1,20 @@
-const Text = () => {
-  return (
-    <div>
-      <h2>{'Text'}</h2>
-      <p>{'Find me in ./web/src/components/Text/Text.tsx'}</p>
-    </div>
-  )
-}
+import React from "react";
+import classNames from "classnames";
 
-export default Text
+export const OverlineTitle = ({ className, alt, ...props }) => {
+  const classes = classNames({
+    "overline-title": true,
+    [`${className}`]: className,
+    "overline-title-alt": alt,
+  });
+  return (
+    <React.Fragment>
+      {!props.tag ? (
+        <h6 className={classes}>{props.children}</h6>
+      ) : (
+        <props.tag className={classes}>{props.children}</props.tag>
+      )}
+    </React.Fragment>
+  );
+};
+

@@ -26,9 +26,6 @@ model User {
   resetTokenExpiresAt DateTime?
   emailVerifiedAt     DateTime?
   lastLoginAt         DateTime?
-  updatedAt           DateTime         @updatedAt
-  createdAt           DateTime         @default(now())
-  deletedAt           DateTime?
   referrals           UserReferral[]
   profile             UserProfile?
   kyc                 UserKYC?
@@ -36,6 +33,13 @@ model User {
   deposits            UserDeposit[]
   withdrawals         UserWithdrawal[]
   tickets             UserTicket[]
+  wallets             Wallet[]
+  reviews             Review[]
+  bought              Trade[]          @relation(name: "bought")
+  sold                Trade[]          @relation(name: "sold")
+  updatedAt           DateTime         @updatedAt
+  createdAt           DateTime         @default(now())
+  deletedAt           DateTime?
 
   @@index([email])
   @@map("users")
@@ -98,9 +102,12 @@ model UserKYC {
   documentType String
   documentPath String
   status       String    @default("PENDING")
+  verifiedAt   DateTime?
   updatedAt    DateTime  @updatedAt
   createdAt    DateTime  @default(now())
   deletedAt    DateTime?
+
+  // Status: enum(PENDING|VERIFIED|REJECTED)
 
   @@map("user_kycs")
 }
@@ -183,41 +190,150 @@ model Coin {
   name      String?
   baseUnit  Decimal?
   symbol    String?
-  updatedAt DateTime  @updatedAt
+  Wallet    Wallet[]
+  Offer     Offer[]
   createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
   deletedAt DateTime?
-  wallets   Wallet[]
+
+  // imageUrl, depositChargePercentage, withdrawChargePercentage
 
   @@map("coins")
 }
 
-model Wallet {
-  id         String @id @default(cuid())
-  userId     String @unique
-  address    String
-  label      String
-  passphrase String @unique
+model Fiat {
+  id        String    @id @default(cuid())
+  name      String?
+  baseUnit  Decimal?
+  symbol    String?
+  Wallet    Wallet[]
+  Offer     Offer[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
 
-  coinId       String
-  coin         Coin          @relation(fields: [coinId], references: [id], onDelete: Cascade)
+  @@map("fiats")
+}
+
+model Wallet {
+  id           String        @id @default(cuid())
+  address      String
+  label        String
+  passphrase   String        @unique
+  userId       String
+  user         User          @relation(fields: [userId], references: [id])
+  coinId       String?
+  fiat         Fiat?         @relation(fields: [fiatId], references: [id])
+  fiatId       String?
+  coin         Coin?         @relation(fields: [coinId], references: [id], onDelete: Cascade)
   transactions Transaction[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  deletedAt    DateTime?
 
   @@map("wallets")
 }
 
 model Transaction {
-  id     String  @id @default(cuid())
-  hash   String
-  txType String  @default("DEPOSIT") // WITHDRAWAL, TRANSFER
-  amount Decimal
+  id        String    @id @default(cuid())
+  hash      String
+  txType    String    @default("DEPOSIT") // WITHDRAWAL, TRANSFER
+  amount    Decimal
+  walletId  String
+  wallet    Wallet    @relation(fields: [walletId], references: [id], onDelete: Cascade)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
 
+  @@map("transactions")
+}
+
+model Offer {
+  id          String    @id @default(cuid())
+  userId      String
+  type        String
+  window      String    @default("15 minutes")
+  margin      Decimal?  @default(0.00)
+  min         Decimal
+  max         Decimal
+  details     String
+  terms       String
+  status      String    @default("DRAFT")
+  coin        Coin      @relation(fields: [coinId], references: [id])
+  coinId      String
+  fiat        Fiat      @relation(fields: [fiatId], references: [id])
+  fiatId      String
+  gateway     Gateway   @relation(fields: [gatewayId], references: [id])
+  gatewayId   String
+  trades      Trade[]
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+
+  // Type: enum(BUY|SELL)
+  // Status: enum(PUBLISHED|DRAFT)
+  @@map("offers")
+}
+
+model Trade {
+  id           String    @id @default(cuid())
+  amount       Decimal
+  crpytoAmount Decimal
+  chargeFee    Decimal
+  exchangeRate Decimal
+  status       String
+  details      String
+  reportedBy   String
+  reviewed     Boolean   @default(false)
+  buyerId      String
+  buyer        User      @relation(fields: [buyerId], references: [id], name: "bought")
+  sellerId     String
+  seller       User      @relation(fields: [sellerId], references: [id], name: "sold")
+  offer        Offer     @relation(fields: [offerId], references: [id])
+  offerId      String
+  gateway      Gateway   @relation(fields: [gatewayId], references: [id])
+  gatewayId    String
+  reviews      Review[]
+  paidAt       DateTime?
+  completedAt  DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  deletedAt    DateTime?
+
+  // Status: enum(FUNDED|COMPLETED|SENT|REPORTED|CANCELLED)
+
+  @@map("trades")
+}
+
+model Review {
+  id          String    @id @default(cuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  recipientId String
+  message     String
+  type        String
+  Trade       Trade?    @relation(fields: [tradeId], references: [id])
+  tradeId     String?
+  updatedAt   DateTime  @updatedAt
+  createdAt   DateTime  @default(now())
+  deletedAt   DateTime?
+
+  // Type: enum(POSITIVE|NEGATIVE)
+
+  @@map("reviews")
+}
+
+model Gateway {
+  id        String    @id @default(cuid())
+  name      String
+  Offer     Offer[]
+  Trade     Trade[]
   updatedAt DateTime  @updatedAt
   createdAt DateTime  @default(now())
   deletedAt DateTime?
-  walletId  String
-  wallet    Wallet    @relation(fields: [walletId], references: [id], onDelete: Cascade)
 
-  @@map("transactions")
+  @@map("gateways")
 }
 
 model Log {

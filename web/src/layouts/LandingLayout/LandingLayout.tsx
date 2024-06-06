@@ -1,8 +1,8 @@
 import 'src/assets/landing/dashlite.scss'
 
-
-import { Link } from "@redwoodjs/router"
-import { useEffect, useState } from "react"
+import { NavLink, routes, useMatch } from "@redwoodjs/router"
+import { useEffect } from "react"
+import Icon from 'src/components/Icon/Icon'
 
 type LandingLayoutProps = {
   children?: React.ReactNode
@@ -136,14 +136,14 @@ export const Paragraph = (props: { className?: any; children: string | number | 
 
 export const MenuLink = ({ data, ...props }: { data?: any, to: string, children: React.ReactNode }) => {
   return (
-    <Link to={props.to} className="menu-link">{props.children}</Link>
+    <a href={props.to} className="menu-link">{props.children}</a>
   )
 }
 
 export const MenuItem = ({ data, ...props }: { data?: any, to: string, text: string }) => {
-  const [active, setActive] = useState(false);
+  const matchInfo = useMatch(props.to)
   return (
-    <li className={['menu-item', active ? "active" : ""].join(' ')}>
+    <li className={['menu-item', matchInfo.match ? "active" : ""].join(' ')}>
       <MenuLink to={props.to}>{props.text}</MenuLink>
     </li>
   )
@@ -222,11 +222,41 @@ export const SectionContant = (props: { className?: any; children: string | numb
   )
 }
 
+const MobileFooter = () => {
+  // const isActive = (route: string) => route == window.location.pathname
+  const matchInfo = useMatch(window.location.pathname)
+  const isActiveRoute = matchInfo.match
+  return (
+    <div className="nk-footer fixed-bottom d-lg-none is-light">
+      <div className="container-fluid wide-xxl">
+        <ul className="nav nav-fill">
+          <li className="nav-item text-center">
+            <Icon name={"home"} className="fs-3 lh-1" />
+            <a className={`nav-link text-center d-block ${isActiveRoute ? 'active' : ''} pt-0`} href={routes.dashboard()}>Home</a>
+          </li>
+          <li className="nav-item text-center">
+            <Icon name={"tranx"} className="fs-3" />
+            <a className={`nav-link text-center d-block ${isActiveRoute ? 'active' : ''} pt-0`} href={routes.offers()}>Offers</a>
+          </li>
+          <li className="nav-item text-center">
+            <Icon name={"growth"} className="fs-3" />
+            <a className={`nav-link text-center d-block ${isActiveRoute ? 'active' : ''} pt-0`} href="#">Ambassadors</a>
+          </li>
+          <li className="nav-item text-center">
+            <Icon name={"user"} className="fs-3" />
+            <a className={`nav-link text-center d-block ${isActiveRoute ? 'active' : ''} pt-0`} href={routes.account()}>Account</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  );
+};
+
 const LandingLayout = ({ children }: LandingLayoutProps) => {
   useEffect(() => {
     document.body.className = "nk-body bg-white npc-landing no-touch nk-nio-theme";
   }, []);
-  return <>{children}</>
+  return <>{children}<MobileFooter /></>
 }
 
 export default LandingLayout

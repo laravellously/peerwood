@@ -11,6 +11,7 @@ export const schema = gql`
   type Query {
     userNotifications: [UserNotification!]! @requireAuth
     userNotification(id: String!): UserNotification @requireAuth
+    notificationsByUser(userId: String!): [UserNotification!]! @requireAuth
   }
 
   input CreateUserNotificationInput {

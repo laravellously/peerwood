@@ -91,4 +91,16 @@ export const User: UserRelationResolvers = {
   tickets: (_obj, { root }) => {
     return db.user.findUnique({ where: { id: root?.id } }).tickets()
   },
+  wallets: (_obj, { root }) => {
+    return db.user.findUnique({ where: { id: root?.id } }).wallets()
+  },
+  reviews: (_obj, { root }) => {
+    return db.user.findUnique({ where: { id: root?.id } }).reviews()
+  },
+  bought: (_obj, { root }) => {
+    return db.user.findUnique({ where: { id: root?.id } }).bought()
+  },
+  sold: (_obj, { root }) => {
+    return db.user.findUnique({ where: { id: root?.id } }).sold()
+  },
 }

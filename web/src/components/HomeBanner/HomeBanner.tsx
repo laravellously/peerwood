@@ -3,22 +3,25 @@ import { useEffect, useState } from "react";
 import { Col, Container, Row } from "reactstrap";
 
 import HeaderImg from 'src/images/header/gfx-c.png';
-import LogoDrak2x from 'src/images/logo-dark2x.png';
-import LogoLight2x from 'src/images/logo2x.png';
-import { ButtonLink, Header, HeaderCaption, HeaderContent, HeaderImage, HeaderMain, HeaderText, HeaderTitle, HeaderWrap, Logo, Menu } from "src/layouts/LandingLayout/LandingLayout";
+import banner from './banner.svg'
+import { ButtonLink, Header, HeaderCaption, HeaderContent, HeaderImage, HeaderMain, HeaderText, HeaderTitle, HeaderWrap, Menu } from "src/layouts/LandingLayout/LandingLayout";
 
 const menuData = [
   {
     text: 'Home',
-    to: '/'
+    to: routes.landing()
   },
   {
-    text: 'Vendors',
-    to: '/'
+    text: 'Features',
+    to: '#features'
   },
   {
-    text: 'Ambassadors',
-    to: '/'
+    text: 'FAQs',
+    to: '#faqs'
+  },
+  {
+    text: 'Community',
+    to: '#cta'
   }
 ]
 
@@ -54,11 +57,12 @@ const HomeBanner = (props: { className: string; id: any; }) => {
       <HeaderMain className={`header-main header-main-s1 is-sticky on-dark is-transparent ${offset > 0 ? "has-fixed" : ""}`}>
         <Container className="header-container">
           <HeaderWrap>
-            <div className="header-logo">
-              <Logo to="/"
+            <div className="header-logo text-white">
+              - APP.LOGO -
+              {/* <Logo to="/"
                 dark={LogoDrak2x}
                 light={LogoLight2x}
-              />
+              /> */}
             </div>
             <div className="header-toggle" onClick={() => setToggle(!toggle)}>
               <button className={`menu-toggler ${toggle === true ? "active" : ""}`}>
@@ -69,11 +73,11 @@ const HomeBanner = (props: { className: string; id: any; }) => {
             <nav className={`header-menu menu ${toggle === true ? "active" : ""} ${mobileView ? "mobile-menu" : ""}`}>
               <Menu className="ms-lg-auto" data={menuData} />
               {/* {!mobileView ? <Menu className="ms-lg-auto" data={menuData} /> : <MobileMenu data={menuData}/>} */}
-              <ul className="menu-btns">
+              {/* <ul className="menu-btns">
                 <li>
                   <ButtonLink to={routes.dashboard()} rel="noreferrer" className="btn-primary btn-lg">Dashboard</ButtonLink>
                 </li>
-              </ul>
+              </ul> */}
             </nav>
             {toggle && window.innerWidth < 992 && <div className="header-overlay" onClick={() => setToggle(!toggle)}></div>}
           </HeaderWrap>
@@ -82,18 +86,18 @@ const HomeBanner = (props: { className: string; id: any; }) => {
       <HeaderContent className="my-auto py-5 is-dark">
         <div className="container">
           <Row className="row justify-content-center text-center">
-            <Col lg="7" md="10">
+            <Col lg="8" md="12">
               <HeaderCaption>
-                <HeaderTitle>Instantly upload any software usage nio saasbox data</HeaderTitle>
+                <HeaderTitle>Trade Cryptocurrency with Ease</HeaderTitle>
                 <HeaderText>
-                  <p>A powerful admin dashboard template that especially build for developers and programmers. DashLite comes with all kind of components.</p>
+                  <p>Connect with other users and trade cryptocurrency directly, securely, and without intermediaries. Whether you're a seasoned trader or new to the world of cryptocurrency, our platform offers a user-friendly interface and robust security features to support all your trading needs.</p>
                 </HeaderText>
                 <ul className="header-action btns-inline">
-                  <li>
+                  {/* <li>
                     <ButtonLink to="https://1.envato.market/reactdashlite" target="_blank" rel="noreferrer" className="btn-primary btn-lg"><span>Getting Started</span></ButtonLink>
-                  </li>
+                  </li> */}
                   <li>
-                    <ButtonLink to="https://1.envato.market/reactdashlite" target="_blank" rel="noreferrer" className="btn-danger btn-lg"><span>View Demo</span></ButtonLink>
+                    <ButtonLink to={routes.dashboard()} target="_blank" rel="noreferrer" className="btn-primary btn-lg"><span>Start Trading Today</span></ButtonLink>
                   </li>
                 </ul>
               </HeaderCaption>
@@ -106,7 +110,7 @@ const HomeBanner = (props: { className: string; id: any; }) => {
           <Row className='justify-content-center'>
             <Col xl="10">
               <div className="card overflow-hidden p-2 bg-light">
-                <img src={HeaderImg} alt="" />
+                <img src={banner} alt="" />
               </div>
             </Col>
           </Row>

@@ -53,7 +53,7 @@ const HomePage = () => (
 
     <div className="nk-main">
       <HomeBanner className="has-header-main-s1 bg-grad-a mb-5 mb-sm-6 mb-md-7" id="#home" />
-      <HomeService className="section-service" id="#service" />
+      <HomeService className="section-service" id="#features" />
       <HomeFooter className="bg-indigo is-dark" id="#footer" />
     </div>
   </>

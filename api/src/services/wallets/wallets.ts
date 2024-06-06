@@ -39,6 +39,12 @@ export const deleteWallet: MutationResolvers['deleteWallet'] = ({ id }) => {
 }
 
 export const Wallet: WalletRelationResolvers = {
+  user: (_obj, { root }) => {
+    return db.wallet.findUnique({ where: { id: root?.id } }).user()
+  },
+  fiat: (_obj, { root }) => {
+    return db.wallet.findUnique({ where: { id: root?.id } }).fiat()
+  },
   coin: (_obj, { root }) => {
     return db.wallet.findUnique({ where: { id: root?.id } }).coin()
   },
